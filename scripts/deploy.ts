@@ -1,5 +1,6 @@
-import { ethers } from "hardhat";
-import { title, description, skills } from "../content.json";
+import hre, { ethers } from "hardhat";
+import { deployContract } from "./functions";
+
 async function main() {
   const currentTimestampInSeconds = Math.round(Date.now() / 1000);
   const ONE_YEAR_IN_SECS = 365 * 24 * 60 * 60;
@@ -10,11 +11,12 @@ async function main() {
   const Lock = await ethers.getContractFactory("Lock");
   const Website = await ethers.getContractFactory("Website");
 
-  const website = await Website.deploy(title, description, skills);
+  const { website } = await deployContract();
   const lock = await Lock.deploy(unlockTime, { value: lockedAmount });
 
   await lock.deployed();
   await website.deployed();
+
   console.log("Website deployed to:", website.address);
   console.log(
     `Lock with 1 ETH and unlock timestamp ${unlockTime} deployed to ${lock.address}`

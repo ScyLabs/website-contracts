@@ -1,5 +1,28 @@
 {
   "title": "Website title",
   "description": "Website description",
-  "skills": ["Skill 1", "Skill 2", "Skill 3"]
+  "skills": ["Skill 1", "Skill 2", "Skill 3"],
+  "projects": [
+    {
+      "title": "Project1",
+      "description": "Project description",
+      "date": "2015-01-01",
+      "url": "http://example.com",
+      "image": "http://example.com/image.png"
+    },
+    {
+      "title": "Project2",
+      "description": "Project description",
+      "date": "2015-01-01",
+      "url": "http://example.com",
+      "image": "http://example.com/image.png"
+    },
+    {
+      "title": "Project3",
+      "description": "Project description",
+      "date": "2015-01-01",
+      "url": "http://example.com",
+      "image": "http://example.com/image.png"
+    }
+  ]
 }

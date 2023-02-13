@@ -3,15 +3,19 @@
   "name": "hardhat-project",
   "devDependencies": {
     "@nomicfoundation/hardhat-toolbox": "^1.0.2",
+    "@openzeppelin/contracts": "^4.8.1",
     "@openzeppelin/hardhat-upgrades": "^1.22.1",
-    "hardhat": "^2.12.7"
+    "hardhat": "^2.12.7",
+    "prettier": "^2.8.4",
+    "prettier-plugin-solidity": "^1.1.2"
   },
   "scripts": {
     "compile": "hardhat compile",
-    "deploy": "hardhat run scripts/deploy.ts",
+    "deploy:local": "hardhat run --network localhost scripts/deploy.ts",
+    "solhint": "./node_modules/.bin/solhint -f table contracts/**/*.sol",
     "test": "hardhat test"
   },
   "dependencies": {
-    "@openzeppelin/contracts": "^4.8.1"
+    "solhint": "^3.3.8"
   }
 }
