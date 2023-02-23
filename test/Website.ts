@@ -3,7 +3,7 @@
 const { expect } = require("chai");
 import { ethers } from "hardhat";
 import { deployContract } from "../scripts/functions";
-import { title, description, skills, projects } from "../content.json";
+import { title, description, skills, projects, about } from "../content.json";
 
 describe("Website", () => {
   describe("Deployment", async () => {
@@ -38,6 +38,10 @@ describe("Website", () => {
           expect(project.url).to.equal(projects[i].url);
         }
       });
+    });
+    it("About is correctly defined", async function () {
+      const { website } = await deployContract();
+      expect(await website.about()).to.equal(about);
     });
     it("Owner is correctly defined", async function () {
       const { website } = await deployContract();
@@ -75,6 +79,14 @@ describe("Website", () => {
       const newDescription = "new description";
       await website.connect(signers[0]).setDescription(newDescription);
       expect(await website.description()).to.equal(newDescription);
+    });
+
+    it("Should update the about", async function () {
+      const { website } = await deployContract();
+      const signers = await ethers.getSigners();
+      const newAbout = "new about";
+      await website.connect(signers[0]).setAbout(newAbout);
+      expect(await website.about()).to.equal(newAbout);
     });
 
     it("Should add a project", async function () {

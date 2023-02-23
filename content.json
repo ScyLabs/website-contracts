@@ -1,7 +1,8 @@
 {
-  "title": "Website title",
+  "title": "Hi, I'm Scylabs, Fullstack développer",
   "description": "Website description",
   "skills": ["Skill 1", "Skill 2", "Skill 3"],
+  "about": "Ex voluptate cupidatat aliqua labore consequat labore et quis sint minim nisi cupidatat.",
   "projects": [
     {
       "title": "Project1",

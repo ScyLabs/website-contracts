@@ -11,6 +11,7 @@
   },
   "scripts": {
     "compile": "hardhat compile",
+    "chain:node": "hardhat node",
     "deploy:local": "hardhat run --network localhost scripts/deploy.ts",
     "solhint": "./node_modules/.bin/solhint -f table contracts/**/*.sol",
     "test": "hardhat test"
