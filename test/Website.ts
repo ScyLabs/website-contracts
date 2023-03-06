@@ -39,6 +39,17 @@ describe("Website", () => {
         }
       });
     });
+    it("ProjectSkills list is ok with base value", async function () {
+      const { website } = await deployContract();
+      console.log(await website.getProjectSkills(1));
+      /* for (let i = 0; i < projects.length; i++) {
+        for (let j = 0; j < projects[i].skills.length; j++) {
+          expect(await website.projectSkills(i, j)).to.equal(
+            projects[i].skills[j]
+          );
+        }
+        */
+    });
     it("About is correctly defined", async function () {
       const { website } = await deployContract();
       expect(await website.about()).to.equal(about);

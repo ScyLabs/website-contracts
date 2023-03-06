@@ -1,7 +1,7 @@
 // SPDX-License-Identifier: UNLICENSED
 pragma solidity ^0.8.17;
 
-import "hardhat/console.sol";
+import "./console.sol";
 import "@openzeppelin/contracts/access/Ownable.sol";
 
 // Website contract with title and description
@@ -15,6 +15,12 @@ contract Website is Ownable {
     //skill tabs
     string[] public skills;
 
+    struct Link {
+        string name;
+        string url;
+        string icon;
+    }
+
     struct Project {
         string title;
         string description;
@@ -22,7 +28,15 @@ contract Website is Ownable {
         string image;
         string url;
     }
+
     Project[] public projects;
+    Link[] public links;
+
+    string[] public projectSkills;
+
+    mapping(uint => uint) public projectLinks;
+
+    mapping(uint => uint[]) public projectSkillsIndexes;
 
     constructor(
         string memory _title,
@@ -33,12 +47,26 @@ contract Website is Ownable {
         string[] memory _projectDescriptions,
         string[] memory _projectDates,
         string[] memory _projectImages,
-        string[] memory _projectUrls
+        string[] memory _projectUrls,
+        bytes memory otherBytes /*
+        bytes memory _links*/
     ) {
         title = _title;
         description = _description;
         about = _about;
         skills = _skills;
+
+        (uint[][] memory _projectSkills, string memory no) = abi.decode(
+            otherBytes,
+            (uint[][], string)
+        );
+
+        /*(
+            string[] memory _linkNames,
+            string[] memory _linkUrls,
+            string[] memory _linkIcons,
+            uint[] memory _projectLinkIndexes
+        ) = abi.decode(_links, (string[], string[], string[], uint[]));*/
 
         for (uint i = 0; i < _projectTitles.length; i++) {
             projects.push(
@@ -51,10 +79,28 @@ contract Website is Ownable {
                 )
             );
         }
+
+        for (uint i = 0; i < _projectSkills.length; i++) {
+            projectSkillsIndexes[i] = _projectSkills[i];
+        }
     }
 
     function getProjects() public view returns (Project[] memory) {
         return projects;
+    }
+
+    function getProjectSkills(
+        uint _projectIndex
+    ) public view returns (string[] memory) {
+        console.log("ok");
+        string[] memory _skills;
+        uint[] memory skillsIndexes = projectSkillsIndexes[_projectIndex];
+
+        for (uint i = 0; i < skillsIndexes.length; i++) {
+            _skills[i] = skills[skillsIndexes[i]];
+        }
+
+        return _skills;
     }
 
     function addProject(

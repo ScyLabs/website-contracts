@@ -2,28 +2,67 @@
   "title": "Hi, I'm Scylabs, Fullstack développer",
   "description": "Website description",
   "skills": ["Skill 1", "Skill 2", "Skill 3"],
-  "about": "Ex voluptate cupidatat aliqua labore consequat labore et quis sint minim nisi cupidatat.",
+  "about": "Passionate about computer science since always, I put my hands in the administration of servers quite early. Then, I trained in the web, first for 3 years with PHP and then I learned NodejS + Reactjs. Then I trained in Web3 technologies thanks to which I worked on various projects",
   "projects": [
     {
       "title": "Project1",
       "description": "Project description",
       "date": "2015-01-01",
       "url": "http://example.com",
-      "image": "http://example.com/image.png"
+      "image": "https://via.placeholder.com/300/09.png",
+      "skills": [0, 1],
+      "links": [
+        {
+          "url": "http://example.com",
+          "name": "github",
+          "icon": "github"
+        },
+        {
+          "url": "http://example.com",
+          "name": "website",
+          "icon": "link"
+        }
+      ]
     },
     {
       "title": "Project2",
       "description": "Project description",
       "date": "2015-01-01",
       "url": "http://example.com",
-      "image": "http://example.com/image.png"
+      "image": "https://via.placeholder.com/300/09.png",
+      "skills": [0, 1, 2],
+      "links": [
+        {
+          "url": "http://example.com",
+          "name": "github",
+          "icon": "github"
+        },
+        {
+          "url": "http://example.com",
+          "name": "website",
+          "icon": "link"
+        }
+      ]
     },
     {
       "title": "Project3",
       "description": "Project description",
       "date": "2015-01-01",
       "url": "http://example.com",
-      "image": "http://example.com/image.png"
+      "image": "https://via.placeholder.com/300/09.png",
+      "skills": [2, 3],
+      "links": [
+        {
+          "url": "http://example.com",
+          "name": "github",
+          "icon": "github"
+        },
+        {
+          "url": "http://example.com",
+          "name": "website",
+          "icon": "link"
+        }
+      ]
     }
   ]
 }
