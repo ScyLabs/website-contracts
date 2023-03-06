@@ -41,14 +41,12 @@ describe("Website", () => {
     });
     it("ProjectSkills list is ok with base value", async function () {
       const { website } = await deployContract();
-      console.log(await website.getProjectSkills(1));
-      /* for (let i = 0; i < projects.length; i++) {
+      for (let i = 0; i < projects.length; i++) {
+        const projectSkills = await website.getProjectSkills(i);
         for (let j = 0; j < projects[i].skills.length; j++) {
-          expect(await website.projectSkills(i, j)).to.equal(
-            projects[i].skills[j]
-          );
+          expect(projectSkills[j]).to.equal(skills[projects[i].skills[j]]);
         }
-        */
+      }
     });
     it("About is correctly defined", async function () {
       const { website } = await deployContract();
@@ -165,6 +163,24 @@ describe("Website", () => {
       expect(project.date).to.equal(newProject.date);
       expect(project.image).to.equal(newProject.image);
       expect(project.url).to.equal(newProject.url);
+    });
+
+    it("Should add a project skill", async function () {
+      const { website } = await deployContract();
+      const signers = await ethers.getSigners();
+      const newSkill = "new skill";
+      await website.connect(signers[0]).addSkill(newSkill);
+      await website.connect(signers[0]).addProjectSkill(1, skills.length);
+      const projectSkills = await website.getProjectSkills(1);
+      expect(projectSkills[projectSkills.length - 1]).to.equal(newSkill);
+    });
+
+    it("Should remove a project skill", async function () {
+      const { website } = await deployContract();
+      const signers = await ethers.getSigners();
+      await website.connect(signers[0]).removeProjectSkill(1, 1);
+      const projectSkills = await website.getProjectSkills(1);
+      expect(projectSkills[1]).to.equal(skills[2]);
     });
   });
 });

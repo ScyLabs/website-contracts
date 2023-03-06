@@ -50,7 +50,7 @@
       "date": "2015-01-01",
       "url": "http://example.com",
       "image": "https://via.placeholder.com/300/09.png",
-      "skills": [2, 3],
+      "skills": [1, 2],
       "links": [
         {
           "url": "http://example.com",

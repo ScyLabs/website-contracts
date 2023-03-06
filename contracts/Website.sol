@@ -92,14 +92,13 @@ contract Website is Ownable {
     function getProjectSkills(
         uint _projectIndex
     ) public view returns (string[] memory) {
-        console.log("ok");
-        string[] memory _skills;
-        uint[] memory skillsIndexes = projectSkillsIndexes[_projectIndex];
+        string[] memory _skills = new string[](
+            projectSkillsIndexes[_projectIndex].length
+        );
 
-        for (uint i = 0; i < skillsIndexes.length; i++) {
-            _skills[i] = skills[skillsIndexes[i]];
+        for (uint i = 0; i < projectSkillsIndexes[_projectIndex].length; i++) {
+            _skills[i] = skills[projectSkillsIndexes[_projectIndex][i]];
         }
-
         return _skills;
     }
 
@@ -160,6 +159,34 @@ contract Website is Ownable {
         require(_index < skills.length, "out of range");
         skills[_index] = skills[skills.length - 1];
         skills.pop();
+    }
+
+    function addProjectSkill(
+        uint _projectIndex,
+        uint _skillIndex
+    ) public onlyOwner {
+        require(_projectIndex < projects.length, "out of range");
+        require(_skillIndex < skills.length, "out of range");
+
+        projectSkillsIndexes[_projectIndex].push(_skillIndex);
+    }
+
+    function removeProjectSkill(
+        uint _projectIndex,
+        uint _skillIndex
+    ) public onlyOwner {
+        require(_projectIndex < projects.length, "out of range");
+        require(_skillIndex < skills.length, "out of range");
+
+        uint[] storage _projectSkills = projectSkillsIndexes[_projectIndex];
+
+        for (uint i = 0; i < _projectSkills.length; i++) {
+            if (_projectSkills[i] == _skillIndex) {
+                _projectSkills[i] = _projectSkills[_projectSkills.length - 1];
+                _projectSkills.pop();
+                break;
+            }
+        }
     }
 
     function setAbout(string memory _about) public onlyOwner {
